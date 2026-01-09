@@ -1,0 +1,13 @@
+# AWS Load Balancer Controller Addon - PROD
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: kube-system
+
+helmCharts:
+  - name: aws-load-balancer-controller
+    repo: https://aws.github.io/eks-charts
+    version: 1.7.1
+    releaseName: aws-load-balancer-controller
+    namespace: kube-system
+    valuesFile: ../../values/aws-load-balancer-controller.values.yaml

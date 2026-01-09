@@ -1,0 +1,46 @@
+# AWS Load Balancer Controller - PROD Environment
+# Helm values for aws-load-balancer-controller
+
+clusterName: min-kyeol-prod-eks
+
+serviceAccount:
+  create: true
+  name: aws-load-balancer-controller
+  annotations:
+    eks.amazonaws.com/role-arn: arn:aws:iam::827913617839:role/min-kyeol-prod-alb-controller-role
+
+region: ap-southeast-2
+vpcId: ""  # Terraform output으로 대체
+
+# PROD: 높은 가용성
+resources:
+  limits:
+    cpu: 500m
+    memory: 512Mi
+  requests:
+    cpu: 200m
+    memory: 256Mi
+
+# High Availability
+replicaCount: 3
+
+# Pod disruption budget
+podDisruptionBudget:
+  maxUnavailable: 1
+
+# PROD: 보안 옵션
+enableShield: false
+enableWaf: false
+enableWafv2: false
+
+# Logging
+logLevel: info
+
+# Pod topology spread
+topologySpreadConstraints:
+  - maxSkew: 1
+    topologyKey: topology.kubernetes.io/zone
+    whenUnsatisfiable: ScheduleAnyway
+    labelSelector:
+      matchLabels:
+        app.kubernetes.io/name: aws-load-balancer-controller
