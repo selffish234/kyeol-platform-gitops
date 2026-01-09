@@ -1,0 +1,37 @@
+# AWS Load Balancer Controller - STAGE Environment
+# Helm values for aws-load-balancer-controller
+
+clusterName: min-kyeol-stage-eks
+
+serviceAccount:
+  create: true
+  name: aws-load-balancer-controller
+  annotations:
+    eks.amazonaws.com/role-arn: arn:aws:iam::827913617839:role/min-kyeol-stage-alb-controller-role
+
+region: ap-southeast-2
+vpcId: ""  # Terraform output으로 대체
+
+# STAGE: DEV보다 높은 리소스
+resources:
+  limits:
+    cpu: 200m
+    memory: 256Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi
+
+# Replica count
+replicaCount: 2
+
+# Pod disruption budget
+podDisruptionBudget:
+  maxUnavailable: 1
+
+# Enable shield for DDoS protection (optional)
+enableShield: false
+enableWaf: false
+enableWafv2: false
+
+# Logging
+logLevel: info
