@@ -1,0 +1,20 @@
+# Metrics Server - STAGE Environment
+# Helm values for metrics-server
+
+replicas: 2
+
+args:
+  - --kubelet-insecure-tls
+  - --kubelet-preferred-address-types=InternalIP
+
+resources:
+  limits:
+    cpu: 100m
+    memory: 128Mi
+  requests:
+    cpu: 50m
+    memory: 64Mi
+
+podDisruptionBudget:
+  enabled: true
+  maxUnavailable: 1

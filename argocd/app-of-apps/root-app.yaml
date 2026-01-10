@@ -1,0 +1,28 @@
+# ArgoCD App-of-Apps: Root Application
+# MGMT 클러스터에서 모든 환경을 관리하는 루트 앱
+
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: kyeol-root
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+
+  source:
+    repoURL: https://github.com/YOUR_ORG/kyeol-platform-gitops.git  # TODO: 실제 레포로 변경
+    targetRevision: main
+    path: argocd/app-of-apps/applications
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: argocd
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
