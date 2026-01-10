@@ -1,0 +1,38 @@
+# ArgoCD Project: Platform Addons
+# 플랫폼 애드온(LBC, ExternalDNS 등) 배포용 프로젝트
+
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: kyeol-platform
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  description: "KYEOL Platform Addons (LBC, ExternalDNS, metrics-server)"
+
+  # 소스 레포지토리 허용
+  sourceRepos:
+    - "https://github.com/YOUR_ORG/kyeol-platform-gitops.git"  # TODO: 실제 레포로 변경
+    - "https://aws.github.io/eks-charts"
+    - "https://kubernetes-sigs.github.io/external-dns"
+    - "https://kubernetes-sigs.github.io/metrics-server"
+
+  # 배포 대상 클러스터/네임스페이스
+  destinations:
+    - namespace: kube-system
+      server: https://kubernetes.default.svc
+    - namespace: external-dns
+      server: https://kubernetes.default.svc
+    - namespace: '*'
+      server: https://kubernetes.default.svc
+
+  # 클러스터 리소스 허용
+  clusterResourceWhitelist:
+    - group: '*'
+      kind: '*'
+
+  # 네임스페이스 리소스 허용
+  namespaceResourceWhitelist:
+    - group: '*'
+      kind: '*'

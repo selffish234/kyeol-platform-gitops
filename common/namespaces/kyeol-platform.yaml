@@ -1,0 +1,9 @@
+# 공통 네임스페이스: kyeol-platform
+
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: kyeol-platform
+  labels:
+    app.kubernetes.io/part-of: kyeol
+    purpose: platform-addons
