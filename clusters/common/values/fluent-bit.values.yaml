@@ -1,19 +1,19 @@
 # Fluent Bit Helm Values - Phase 3
-# namespace: amazon-cloudwatch (IRSA 조건과 일치해야 함)
-# serviceAccount.name: fluent-bit (IRSA 조건과 일치해야 함)
+# namespace: amazon-cloudwatch (IRSA 조건�??�치?�야 ??
+# serviceAccount.name: fluent-bit (IRSA 조건�??�치?�야 ??
 
 serviceAccount:
   create: true
   name: fluent-bit
   annotations:
-    # IRSA Role ARN - terraform output fluent_bit_role_arn 값으로 교체
+    # IRSA Role ARN - terraform output fluent_bit_role_arn 값으�?교체
     eks.amazonaws.com/role-arn: "arn:aws:iam::ACCOUNT_ID:role/PREFIX-fluent-bit-role"
 
-# DaemonSet 설정
+# DaemonSet ?�정
 tolerations:
   - operator: Exists
 
-# 로그 수집 설정
+# 로그 ?�집 ?�정
 config:
   service: |
     [SERVICE]
@@ -52,12 +52,12 @@ config:
     [OUTPUT]
         Name                cloudwatch_logs
         Match               kube.*
-        region              ap-southeast-2
+        region              ap-northeast-2
         log_group_name      /aws/eks/${CLUSTER_NAME}/containers
         log_stream_prefix   fluentbit-
         auto_create_group   true
 
-# 리소스 제한
+# 리소???�한
 resources:
   limits:
     cpu: 200m

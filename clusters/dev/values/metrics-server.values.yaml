@@ -12,6 +12,6 @@ resources:
     cpu: 50m
     memory: 64Mi
 
-# API 서비스 설정
+# API ?�비???�정
 apiService:
   create: true
