@@ -1,0 +1,25 @@
+# Platform GitOps 산출물
+*.tfstate
+.terraform/
+
+# 환경별 시크릿 (Git에 저장 금지)
+**/secrets/*.yaml
+!**/secrets/README.md
+
+# kubeconfig (Git에 저장 금지)
+kubeconfig*
+*kubeconfig*
+
+# 로컬 테스트 산출물
+*.rendered
+*.out
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
