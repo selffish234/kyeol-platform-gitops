@@ -1,52 +1,9 @@
-# ExternalDNS - PROD Environment
-# Helm values for external-dns
-
 provider: aws
-aws:
-  region: ap-northeast-2
-  zoneType: public
-
 domainFilters:
   - kyeol.click
-
-# PROD: unique identifier
 txtOwnerId: kyeol-prod
-
-policy: sync
-registry: txt
-
-sources:
-  - service
-  - ingress
-
 serviceAccount:
   create: true
   name: external-dns
   annotations:
-    eks.amazonaws.com/role-arn: arn:aws:iam::000000000000:role/kyeol-prod-external-dns-role  # TODO: Replace with actual ARN
-
-# PROD: high availability
-replicaCount: 3
-
-resources:
-  limits:
-    cpu: 200m
-    memory: 256Mi
-  requests:
-    cpu: 100m
-    memory: 128Mi
-
-# PROD: faster sync
-interval: 30s
-
-# Log level
-logLevel: info
-
-# Pod topology spread
-topologySpreadConstraints:
-  - maxSkew: 1
-    topologyKey: topology.kubernetes.io/zone
-    whenUnsatisfiable: ScheduleAnyway
-    labelSelector:
-      matchLabels:
-        app.kubernetes.io/name: external-dns
+    eks.amazonaws.com/role-arn: arn:aws:iam::827913617839:role/kyeol-prod-external-dns-role
