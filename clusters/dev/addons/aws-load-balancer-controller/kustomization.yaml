@@ -1,18 +1,18 @@
 # AWS Load Balancer Controller: Kustomization (DEV)
-# Helm template 산출물을 Kustomize로 래핑
+# Helm template ?�출물을 Kustomize�??�핑
 
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
 namespace: kube-system
 
-# Helm Chart를 helmCharts로 참조
-# 또는 helm template로 생성된 매니페스트를 resources로 참조
+# Helm Chart�?helmCharts�?참조
+# ?�는 helm template�??�성??매니?�스?��? resources�?참조
 
 helmCharts:
   - name: aws-load-balancer-controller
     repo: https://aws.github.io/eks-charts
-    version: 1.6.2  # 최신 버전 확인 필요
+    version: 1.6.2  # 최신 버전 ?�인 ?�요
     releaseName: aws-load-balancer-controller
     namespace: kube-system
     valuesFile: ../../values/aws-load-balancer-controller.values.yaml

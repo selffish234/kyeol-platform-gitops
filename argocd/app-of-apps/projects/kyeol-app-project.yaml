@@ -1,5 +1,5 @@
 # ArgoCD Project: Kyeol Apps
-# Saleor 앱 배포용 프로젝트
+# Saleor ??배포???�로?�트
 
 apiVersion: argoproj.io/v1alpha1
 kind: AppProject
@@ -11,11 +11,11 @@ metadata:
 spec:
   description: "KYEOL Saleor Applications"
 
-  # 소스 레포지토리 허용
+  # ?�스 ?�포지?�리 ?�용
   sourceRepos:
-    - "https://github.com/YOUR_ORG/kyeol-app-gitops.git"  # TODO: 실제 레포로 변경
+    - "https://github.com/YOUR_ORG/kyeol-app-gitops.git"  # TODO: ?�제 ?�포�?변�?
 
-  # 배포 대상: kyeol 네임스페이스만
+  # 배포 ?�?? kyeol ?�임?�페?�스�?
   destinations:
     - namespace: kyeol
       server: https://kubernetes.default.svc
@@ -26,14 +26,14 @@ spec:
     - namespace: kyeol-prod
       server: https://kubernetes.default.svc
 
-  # 클러스터 리소스: Namespace, ClusterRole 등 허용
+  # ?�러?�터 리소?? Namespace, ClusterRole ???�용
   clusterResourceWhitelist:
     - group: ''
       kind: Namespace
     - group: networking.k8s.io
       kind: IngressClass
 
-  # 네임스페이스 리소스 허용
+  # ?�임?�페?�스 리소???�용
   namespaceResourceWhitelist:
     - group: '*'
       kind: '*'

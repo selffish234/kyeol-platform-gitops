@@ -1,35 +1,35 @@
 # ExternalDNS: Helm Values (DEV)
-# Route53 origin-dev-kyeol.msp-g1.click 레코드 자동 관리
+# Route53 origin-dev.kyeol.click record management
 
 provider: aws
 
 aws:
-  region: ap-southeast-2
+  region: ap-northeast-2
   zoneType: public
 
-# IRSA 역할 ARN
+# IRSA Role ARN
 serviceAccount:
   create: true
   name: external-dns
   annotations:
-    eks.amazonaws.com/role-arn: "arn:aws:iam::827913617839:role/min-kyeol-dev-external-dns-role"  # TODO: 실제 ARN으로 교체
+    eks.amazonaws.com/role-arn: "arn:aws:iam::000000000000:role/kyeol-dev-external-dns-role"  # TODO: Replace with actual ARN
 
-# 도메인 필터
+# Domain filter
 domainFilters:
-  - msp-g1.click
+  - kyeol.click
 
-# TXT 레코드 소유자 ID (환경별 고유)
-txtOwnerId: min-kyeol-dev
+# TXT record owner ID (unique per environment)
+txtOwnerId: kyeol-dev
 
-# 정책: sync = 생성/업데이트/삭제 모두 관리
+# Policy: sync = manage create/update/delete
 policy: sync
 
-# 소스: Ingress, Service
+# Sources: Ingress, Service
 sources:
   - ingress
   - service
 
-# 리소스 설정 (DEV는 최소)
+# Resources (DEV: minimal)
 resources:
   limits:
     cpu: 100m
@@ -38,6 +38,6 @@ resources:
     cpu: 50m
     memory: 64Mi
 
-# 로깅
+# Logging
 logLevel: info
 logFormat: text

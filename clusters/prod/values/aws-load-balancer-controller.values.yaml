@@ -1,18 +1,18 @@
 # AWS Load Balancer Controller - PROD Environment
 # Helm values for aws-load-balancer-controller
 
-clusterName: min-kyeol-prod-eks
+clusterName: kyeol-prod-eks
 
 serviceAccount:
   create: true
   name: aws-load-balancer-controller
   annotations:
-    eks.amazonaws.com/role-arn: arn:aws:iam::827913617839:role/min-kyeol-prod-alb-controller-role
+    eks.amazonaws.com/role-arn: arn:aws:iam::000000000000:role/kyeol-prod-alb-controller-role  # TODO: ?�제 ARN?�로 교체
 
-region: ap-southeast-2
-vpcId: ""  # Terraform output으로 대체
+region: ap-northeast-2
+vpcId: ""  # Terraform output?�로 ?��?
 
-# PROD: 높은 가용성
+# PROD: ?��? 가?�성
 resources:
   limits:
     cpu: 500m
@@ -28,7 +28,7 @@ replicaCount: 3
 podDisruptionBudget:
   maxUnavailable: 1
 
-# PROD: 보안 옵션
+# PROD: 보안 ?�션
 enableShield: false
 enableWaf: false
 enableWafv2: false

@@ -1,5 +1,5 @@
 # ArgoCD App-of-Apps: Root Application
-# MGMT 클러스터에서 모든 환경을 관리하는 루트 앱
+# MGMT ?�러?�터?�서 모든 ?�경??관리하??루트 ??
 
 apiVersion: argoproj.io/v1alpha1
 kind: Application
@@ -12,7 +12,7 @@ spec:
   project: default
 
   source:
-    repoURL: https://github.com/YOUR_ORG/kyeol-platform-gitops.git  # TODO: 실제 레포로 변경
+    repoURL: https://github.com/YOUR_ORG/kyeol-platform-gitops.git  # TODO: ?�제 ?�포�?변�?
     targetRevision: main
     path: argocd/app-of-apps/applications
 

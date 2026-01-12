@@ -8,7 +8,7 @@ namespace: kube-system
 helmCharts:
   - name: external-dns
     repo: https://kubernetes-sigs.github.io/external-dns
-    version: 1.14.3  # 최신 버전 확인 필요
+    version: 1.14.3  # 최신 버전 ?�인 ?�요
     releaseName: external-dns
     namespace: kube-system
     valuesFile: ../../values/external-dns.values.yaml

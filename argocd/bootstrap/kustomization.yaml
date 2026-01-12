@@ -1,5 +1,5 @@
 # ArgoCD Bootstrap: Kustomization
-# ArgoCD 2.9.x 기준
+# ArgoCD 2.9.x 기�?
 
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
@@ -8,12 +8,12 @@ namespace: argocd
 
 resources:
   - namespace.yaml
-  # ArgoCD 공식 매니페스트 (최신 stable)
-  # 실제 배포 시 특정 버전으로 고정하세요
+  # ArgoCD 공식 매니?�스??(최신 stable)
+  # ?�제 배포 ???�정 버전?�로 고정?�세??
   - https://raw.githubusercontent.com/argoproj/argo-cd/v2.9.3/manifests/install.yaml
 
-# 패치: ArgoCD Server를 LoadBalancer로 노출 (선택적)
-# 프로덕션에서는 Ingress 사용 권장
+# ?�치: ArgoCD Server�?LoadBalancer�??�출 (?�택??
+# ?�로?�션?�서??Ingress ?�용 권장
 patches:
   - patch: |-
       apiVersion: v1

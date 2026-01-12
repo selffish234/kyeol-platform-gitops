@@ -8,7 +8,7 @@ namespace: kube-system
 helmCharts:
   - name: metrics-server
     repo: https://kubernetes-sigs.github.io/metrics-server
-    version: 3.11.0  # 최신 버전 확인 필요
+    version: 3.11.0  # 최신 버전 ?�인 ?�요
     releaseName: metrics-server
     namespace: kube-system
     valuesFile: ../../values/metrics-server.values.yaml
