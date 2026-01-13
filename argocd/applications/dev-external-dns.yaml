@@ -23,7 +23,7 @@ spec:
       targetRevision: main
       ref: values
   destination:
-    server: https://kubernetes.default.svc
+    server: https://FA291B8646007A17C6A2BAFD80B4CA3E.gr7.ap-northeast-2.eks.amazonaws.com
     namespace: kube-system
   syncPolicy:
     automated:

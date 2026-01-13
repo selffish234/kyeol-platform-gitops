@@ -1,8 +1,8 @@
 clusterName: kyeol-prod-eks
+region: ap-northeast-2
+vpcId: vpc-0a6b557eaa4719c25
 serviceAccount:
   create: true
   name: aws-load-balancer-controller
   annotations:
     eks.amazonaws.com/role-arn: arn:aws:iam::827913617839:role/kyeol-prod-alb-controller-role
-region: ap-northeast-2
-vpcId: vpc-0a6b557eaa4719c25

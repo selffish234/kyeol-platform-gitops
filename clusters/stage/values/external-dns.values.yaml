@@ -1,42 +1,12 @@
-# ExternalDNS - STAGE Environment
-# Helm values for external-dns
-
 provider: aws
 aws:
   region: ap-northeast-2
-  zoneType: public
-
 domainFilters:
   - kyeol.click
-
 txtOwnerId: kyeol-stage
-
 policy: sync
-registry: txt
-
-sources:
-  - service
-  - ingress
-
 serviceAccount:
   create: true
   name: external-dns
   annotations:
-    eks.amazonaws.com/role-arn: arn:aws:iam::000000000000:role/kyeol-stage-external-dns-role  # TODO: Replace with actual ARN
-
-# STAGE: 2 replicas
-replicaCount: 2
-
-resources:
-  limits:
-    cpu: 100m
-    memory: 128Mi
-  requests:
-    cpu: 50m
-    memory: 64Mi
-
-# Interval
-interval: 1m
-
-# Log level
-logLevel: info
+    eks.amazonaws.com/role-arn: arn:aws:iam::827913617839:role/kyeol-stage-external-dns-role
