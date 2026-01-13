@@ -1,43 +1,12 @@
-# ExternalDNS: Helm Values (DEV)
-# Route53 origin-dev.kyeol.click record management
-
 provider: aws
-
 aws:
   region: ap-northeast-2
-  zoneType: public
-
-# IRSA Role ARN
+domainFilters:
+  - kyeol.click
+txtOwnerId: kyeol-dev
+policy: sync
 serviceAccount:
   create: true
   name: external-dns
   annotations:
-    eks.amazonaws.com/role-arn: "arn:aws:iam::000000000000:role/kyeol-dev-external-dns-role"  # TODO: Replace with actual ARN
-
-# Domain filter
-domainFilters:
-  - kyeol.click
-
-# TXT record owner ID (unique per environment)
-txtOwnerId: kyeol-dev
-
-# Policy: sync = manage create/update/delete
-policy: sync
-
-# Sources: Ingress, Service
-sources:
-  - ingress
-  - service
-
-# Resources (DEV: minimal)
-resources:
-  limits:
-    cpu: 100m
-    memory: 128Mi
-  requests:
-    cpu: 50m
-    memory: 64Mi
-
-# Logging
-logLevel: info
-logFormat: text
+    eks.amazonaws.com/role-arn: arn:aws:iam::827913617839:role/kyeol-dev-external-dns-role

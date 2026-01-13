@@ -1,28 +1,8 @@
-# AWS Load Balancer Controller: Helm Values (DEV)
-# IRSA ??•  ARN?€ Terraform output?ì„œ ê°€?¸ì˜µ?ˆë‹¤.
-
-clusterName: kyeol-dev-eks
+ï»¿clusterName: kyeol-dev-eks
 region: ap-northeast-2
-
+vpcId: vpc-02f5885481c1e9b2d
 serviceAccount:
   create: true
   name: aws-load-balancer-controller
   annotations:
-    eks.amazonaws.com/role-arn: "arn:aws:iam::000000000000:role/kyeol-dev-alb-controller-role"  # TODO: ?¤ì œ ARN?¼ë¡œ êµì²´
-
-# ë¦¬ì†Œ???¤ì • (DEV??ìµœì†Œ)
-resources:
-  limits:
-    cpu: 200m
-    memory: 256Mi
-  requests:
-    cpu: 100m
-    memory: 128Mi
-
-# ë¡œê¹…
-enableShield: false
-enableWaf: false
-enableWafv2: false
-
-# ?œë¸Œ???ë™ ê²€??(EKS ?œê·¸ ê¸°ë°˜)
-# kubernetes.io/cluster/<cluster-name> = shared
+    eks.amazonaws.com/role-arn: arn:aws:iam::827913617839:role/kyeol-dev-alb-controller-role
