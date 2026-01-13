@@ -19,7 +19,7 @@ spec:
       targetRevision: main
       ref: values
   destination:
-    server: https://FA291B8646007A17C6A2BAFD80B4CA3E.gr7.ap-northeast-2.eks.amazonaws.com
+    server: https://C53A5A8DFCEB4D6D41C8EB9655996281.gr7.ap-northeast-2.eks.amazonaws.com
     namespace: kube-system
   syncPolicy:
     automated:
