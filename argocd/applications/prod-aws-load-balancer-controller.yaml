@@ -15,25 +15,6 @@ spec:
         releaseName: aws-load-balancer-controller
         valueFiles:
           - $values/clusters/prod/values/aws-load-balancer-controller.values.yaml
-        patches:
-          - strategicMergePatch:
-              apiVersion: apps/v1
-              kind: Deployment
-              metadata:
-                name: aws-load-balancer-controller
-              spec:
-                template:
-                  spec:
-                    containers:
-                      - name: aws-load-balancer-controller
-                        readinessProbe:
-                          httpGet:
-                            path: /healthz
-                            port: 61779
-                            scheme: HTTP
-                          initialDelaySeconds: 10
-                          periodSeconds: 10
-                          failureThreshold: 2
     - repoURL: https://github.com/MSP-Team3/kyeol-platform-gitops.git
       targetRevision: main
       ref: values
