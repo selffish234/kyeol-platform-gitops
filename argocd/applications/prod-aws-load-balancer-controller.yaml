@@ -1,0 +1,30 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: aws-load-balancer-controller-prod
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
+spec:
+  project: kyeol-platform
+  sources:
+    - repoURL: https://aws.github.io/eks-charts
+      chart: aws-load-balancer-controller
+      targetRevision: 1.6.2
+      helm:
+        releaseName: aws-load-balancer-controller
+        valueFiles:
+          - $values/clusters/prod/values/aws-load-balancer-controller.values.yaml
+    - repoURL: https://github.com/MSP-Team3/kyeol-platform-gitops.git
+      targetRevision: main
+      ref: values
+  destination:
+    server: https://D706BE88F36A43CA4F590E9425BA6094.gr7.ap-northeast-2.eks.amazonaws.com
+    namespace: kube-system
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=false
+      - ServerSideApply=true
