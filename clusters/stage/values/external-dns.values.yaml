@@ -1,3 +1,5 @@
+fullnameOverride: external-dns
+
 provider: aws
 aws:
   region: ap-northeast-2
