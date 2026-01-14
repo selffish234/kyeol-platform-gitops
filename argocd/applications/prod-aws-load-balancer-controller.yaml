@@ -21,10 +21,16 @@ spec:
   destination:
     server: https://D706BE88F36A43CA4F590E9425BA6094.gr7.ap-northeast-2.eks.amazonaws.com
     namespace: kube-system
+  ignoreDifferences:
+    - group: apps
+      kind: Deployment
+      name: aws-load-balancer-controller
+      jsonPointers:
+        - /spec/template/spec/containers/0/readinessProbe
   syncPolicy:
     automated:
       prune: true
-      selfHeal: false
+      selfHeal: true
     syncOptions:
       - CreateNamespace=false
       - ServerSideApply=true
