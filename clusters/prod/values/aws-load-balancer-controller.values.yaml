@@ -6,3 +6,10 @@ serviceAccount:
   name: aws-load-balancer-controller
   annotations:
     eks.amazonaws.com/role-arn: arn:aws:iam::827913617839:role/kyeol-prod-alb-controller-role
+
+# Fix for readiness probe 404 error
+readinessProbe:
+  httpGet:
+    path: /healthz
+    port: 61779
+    scheme: HTTP
