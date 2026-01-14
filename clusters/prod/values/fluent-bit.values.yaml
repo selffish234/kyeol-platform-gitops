@@ -75,7 +75,7 @@ config:
 
     [OUTPUT]
         Name                s3
-        Match               kube.var.log.containers.*_saleor_*
+        Match               kube.var.log.containers.*_kyeol_*
         bucket              kyeol-prod-logs
         region              ap-northeast-2
         total_file_size     10M
