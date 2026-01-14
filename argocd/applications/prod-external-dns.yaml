@@ -1,0 +1,29 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: external-dns-prod
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "2"
+spec:
+  project: kyeol-platform
+  sources:
+    - repoURL: https://kubernetes-sigs.github.io/external-dns/
+      chart: external-dns
+      targetRevision: 1.14.0
+      helm:
+        releaseName: external-dns
+        valueFiles:
+          - $values/clusters/prod/values/external-dns.values.yaml
+    - repoURL: https://github.com/MSP-Team3/kyeol-platform-gitops.git
+      targetRevision: main
+      ref: values
+  destination:
+    server: https://D706BE88F36A43CA4F590E9425BA6094.gr7.ap-northeast-2.eks.amazonaws.com
+    namespace: kube-system
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=false
