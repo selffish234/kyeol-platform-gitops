@@ -7,23 +7,19 @@ metadata:
     argocd.argoproj.io/sync-wave: "1"
 spec:
   project: kyeol-platform
-  source:
-    repoURL: https://aws.github.io/eks-charts
-    chart: aws-load-balancer-controller
-    targetRevision: 1.6.2
-    helm:
-      releaseName: aws-load-balancer-controller
-      valueFiles:
-        - $values/clusters/dev/values/aws-load-balancer-controller.values.yaml
   sources:
     - repoURL: https://aws.github.io/eks-charts
       chart: aws-load-balancer-controller
       targetRevision: 1.6.2
+      helm:
+        releaseName: aws-load-balancer-controller
+        valueFiles:
+          - $values/clusters/dev/values/aws-load-balancer-controller.values.yaml
     - repoURL: https://github.com/MSP-Team3/kyeol-platform-gitops.git
       targetRevision: main
       ref: values
   destination:
-    server: https://FA291B8646007A17C6A2BAFD80B4CA3E.gr7.ap-northeast-2.eks.amazonaws.com
+    server: https://C53A5A8DFCEB4D6D41C8EB9655996281.gr7.ap-northeast-2.eks.amazonaws.com
     namespace: kube-system
   syncPolicy:
     automated:
