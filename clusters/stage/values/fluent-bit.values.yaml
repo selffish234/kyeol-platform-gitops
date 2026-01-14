@@ -47,7 +47,14 @@ config:
         K8S-Logging.Parser  On
         K8S-Logging.Exclude On
 
+    # Fluent Bit 자체 로그 제외
+    [FILTER]
+        Name    grep
+        Match   kube.*
+        Exclude $kubernetes['namespace_name'] ^amazon-cloudwatch$
+
   outputs: |
+    # CloudWatch: 전체 로그 (1일 보존, 실시간 모니터링용)
     [OUTPUT]
         Name                cloudwatch_logs
         Match               kube.*
@@ -55,6 +62,25 @@ config:
         log_group_name      /aws/eks/kyeol-stage-eks/containers
         log_stream_prefix   fluentbit-
         auto_create_group   true
+
+    # S3: 애플리케이션 로그만 (1년 보존, ISMS-P)
+    [OUTPUT]
+        Name                s3
+        Match               kube.var.log.containers.*_default_*
+        bucket              kyeol-stage-logs
+        region              ap-northeast-2
+        total_file_size     10M
+        upload_timeout      3m
+        s3_key_format       /eks-logs/%Y/%m/%d/%H/$UUID.json
+
+    [OUTPUT]
+        Name                s3
+        Match               kube.var.log.containers.*_saleor_*
+        bucket              kyeol-stage-logs
+        region              ap-northeast-2
+        total_file_size     10M
+        upload_timeout      3m
+        s3_key_format       /eks-logs/%Y/%m/%d/%H/$UUID.json
 
 # 리소스 제한
 resources:
