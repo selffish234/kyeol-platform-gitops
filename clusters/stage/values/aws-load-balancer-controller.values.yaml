@@ -6,3 +6,7 @@ serviceAccount:
   name: aws-load-balancer-controller
   annotations:
     eks.amazonaws.com/role-arn: arn:aws:iam::827913617839:role/kyeol-stage-alb-controller-role
+readinessProbe:
+  httpGet:
+    path: /healthz
+    port: 61779
