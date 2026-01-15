@@ -1,0 +1,18 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: aws-load-balancer-controller
+  namespace: kube-system
+spec:
+  template:
+    spec:
+      containers:
+        - name: aws-load-balancer-controller
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: 61779
+              scheme: HTTP
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            failureThreshold: 2
